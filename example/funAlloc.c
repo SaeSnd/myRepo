@@ -68,6 +68,22 @@ void darDataBi(typeReq **ap,int x, int y){
   }
 }
 
+void mostrarArr(typeReq* ap){
+  int x = valOf(ap),i;
+  for (i = 0; i < x; i++)
+    printf("%% ",*(ap+i));
+  printf("\n");
+}
+
+void mostrarArrBi(typeReq** ap,int x,int y){
+  for (int i = 0; i < x; i++) {
+    for (int j = 0; j < y; j++) {
+      printf("%% ",*(*(ap+i)+j);
+    }
+    printf("\n");
+  }
+}
+
 //x es x dimension
 void freeBi(void **ap,int x){
   int i;

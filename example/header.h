@@ -17,6 +17,9 @@ void **crearArrBi(int, int);
 void darData(typeReq*);
 void darDataBi(typeReq**,int,int);
 
+void mostrarArr(typeReq*);
+void mostrarArrBi(typeReq**,int,int);
+
 void freeBi(void **,int);
 void freeArr(void*);
 
