@@ -19,6 +19,7 @@ void fillGente(Persona*,int);
 
 void showGente(Persona*,int);
 void ordenarGente(Persona*,int);
+void liberar(Persona*);
 
 int main (int argc, char *argv[])
 {
@@ -29,13 +30,20 @@ int main (int argc, char *argv[])
   fillGente(gente,n);
 
   showGente(gente,n);
+  liberar(gente);
 
   return 0;
+}
+
+void msg(int n){
+  char *error[] = {"No hay memoria disponible... ","Memoria liberada. "};
+  printf("%s\n",error[n]);
 }
 
 int preguntarData(){
   int n;
   printf("¿Cuantas personas son?: "); scanf("%d",&n);
+  getchar();
   return n;
 }
 
@@ -48,30 +56,33 @@ Persona *crearGente(int n){
 
 
 void fillGente(Persona *ap, int n){
+  int tmp;
   for (int i = 0; i < n; i++) {
-    printf("--Persona [%d]:\n",i);
-    printf("Ingresa la edad: "); scanf("%d",&(ap->edad));
-    printf("Ingresa el nombre: "); fgets(ap->nombre,VAL_MAX,stdin); 
+    printf("--Persona [%d]:\n",i+1);
+    fflush(stdin);
+    printf("Ingresa el nombre: "); fgets((ap+i)->nombre,VAL_MAX,stdin); 
+    printf("Ingresa la edad: "); scanf("%d",&((ap+i)->edad));
     getchar();
-
-    printf("Ingresa la direccion: "); fgets(ap->direccion,VAL_MAX,stdin);
-    getchar();
-
-    printf("Ingresa el numero: "); fgets(ap->telefono,VAL_MAX,stdin);
-    getchar();
+    printf("Ingresa la direccion: "); fgets((ap+i)->direccion,VAL_MAX,stdin);
+    printf("Ingresa el numero: "); fgets((ap+i)->telefono,VAL_MAX,stdin);
   }
 }
 
 void showGente(Persona *ap, int n){
   ordenarGente(ap,n);
-
+  for (int i = 0; i < n; i++) {
+    printf("\n------------[%d]--------------\n",i+1);
+    printf("%s%d años\n",(ap+i)->nombre,(ap+i)->edad);
+    printf("Vive en %s",(ap+i)->direccion);
+    printf("Numero de telefono: %s",(ap+i)->telefono);
+  }
 } 
 
 void ordenarGente(Persona *ap,int n){
   int i, j;
   Persona tmp;
   for(i = 0; i < n; i++){
-    for(j = 1; j < n - i - 1; j++){
+    for(j = 0; j < n - i - 1; j++){
       if((ap+j)->edad < (ap+j+1)->edad){
         
         tmp = ap[j];
@@ -82,4 +93,7 @@ void ordenarGente(Persona *ap,int n){
   }
 }
 
-
+void liberar(Persona *ap){
+  free(ap);
+  msg(1);
+}

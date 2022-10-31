@@ -151,15 +151,15 @@ void liberarAlumnos(Alumno *ap,int n){
     for (int i = 0; i < n; i++)
     {
         free((ap + i)->fe);
-        msg(((ap + i)->fe == NULL) ? 0 : 1);
+        msg(0);
         free((ap + i)->nombre);
-        msg(((ap + i)->nombre == NULL) ? 0 : 1);
+        msg(0);
     }
     free(ap);
-    msg((ap == NULL) ? 1 : 0);
+    msg(0);
 }
 
 void liberarChar(char *ap){
     free(ap);
-    msg((ap == NULL) ? 1 : 0);
+    msg(0);
 }
